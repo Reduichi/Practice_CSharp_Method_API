@@ -8,14 +8,14 @@ public class Fox : MonoBehaviour
     public SpriteRenderer Sr ;
 
     /// <summary>
-    /// 讓狐狸移動，並且增加剛體
+    /// 水平移動按鍵控制，並且增加剛體讓狐狸移動
     /// </summary>
     /// <param name="x"></param>
     private void OnAnimatorMove(float x)
     {
-        x = Input.GetAxisRaw("Horizontal") * speed;
-        transform.Translate(x * Time.deltaTime, 0, 0);
-        //Time.deltaTime 減慢時間
+        x = Input.GetAxisRaw("Horizontal") * speed * 10;
+        // transform.Translate(x * Time.deltaTime, 0, 0);
+        // Time.deltaTime 一幀的時間
 
         Rig.AddForce(new Vector2(x, 0)); // 增加剛體
     }
@@ -29,12 +29,10 @@ public class Fox : MonoBehaviour
         {
             Sr.flipX = true;
         }
-    }
-
-    private void Start()
-    { 
-        Rig = gameObject.AddComponent<Rigidbody2D>();
-        Sr = gameObject.AddComponent<SpriteRenderer>();
+        else if (Input.GetKeyDown("d"))
+        {
+            Sr.flipX = false;
+        }
     }
 
     private void Update() 
